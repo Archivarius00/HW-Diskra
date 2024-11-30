@@ -28,6 +28,8 @@ def prog(n):
 
 num = 1
 cnt = 0
+
+
 # pygame.init()
 # pygame.mixer.init()
 # pygame.mixer.music.load("Cyberpunk 2077 Unreleased OST – The Rebel Path (Cello Version).mp3")
