@@ -5,37 +5,37 @@ from tkinter import *
 import time as t
 
 def arr_check():
-    global check 
-    check = True
+    next(gen)
 
 def clear():
     entry.delete(0, END)
  
 def display():  
-    arr = entry.get()
+    global n
+    n = entry.get()
     clear()
-    prog(arr)
+    next(gen)
 
 def arrange():
-    global check
-    while True:
-        t.sleep(0.5)
-        if check == True:
-            break
     arr = entry.get()
-    check = False
     clear()
-    return str(arr)
+    return arr
 
 
-def prog(n):
+def prog():
+    global n
+    print(n)
     for k in range(int(n)):
         if k != 0:
+            yield
             arr = lst
-            list1 = [str(inp) for inp in arrange()]
+            list1 = [str(inp) for inp in arrange().split()]
+            print(list1)
             lst = list(set(list1) & set(arr))
         else:
-            list1 = [str(inp) for inp in arrange()]
+            yield
+            list1 = [str(inp) for inp in arrange().split()]
+            print(list1)
             lst = list1
     
     ans = ' '.join(lst)
@@ -44,11 +44,13 @@ def prog(n):
 
 num = 1
 check = False
+in_arr = ''
+gen = prog()
 
-# pygame.init()
-# pygame.mixer.init()
-# pygame.mixer.music.load("Cyberpunk 2077 Unreleased OST – The Rebel Path (Cello Version).mp3")
-# pygame.mixer.music.play()
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load("Cyberpunk 2077 Unreleased OST – The Rebel Path (Cello Version).mp3")
+pygame.mixer.music.play()
 
 
 
@@ -79,7 +81,6 @@ btn_start.grid(column=0, row=3, padx=10, pady=10)
 
 btn_start = tk.Button(frame, text='Arr', command=arr_check, font=('Comic Sans MS', 10))
 btn_start.grid(column=2, row=3, padx=10, pady=10)
-
 
 
 window.mainloop()
